@@ -1,0 +1,24 @@
+﻿@model (HW_ASP_9._2.Models.Category, IEnumerable<HW_ASP_9._2.Models.Article>)
+
+@{
+    ViewData["Title"] = Model.Item1.Name;
+    var category = Model.Item1;
+    var articles = Model.Item2;
+}
+
+<h2>@category.Name</h2>
+<p>@category.Description</p>
+<p>Количество статей: @ViewBag.ArticleCount</p>
+
+<h3>Статьи:</h3>
+@foreach (var article in articles)
+{
+    <div class="mb-3">
+        <h4>
+            <a asp-controller="Article" asp-action="Details" asp-route-id="@article.Id">
+                @article.Title
+            </a>
+        </h4>
+        <truncate-text text="@article.Content" length="300"></truncate-text>
+    </div>
+}
